@@ -1,0 +1,69 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+            <h1>Manage reservations</h1>
+        </li>
+    </ol>
+</nav>
+
+<div class="row g-3 mb-2">
+    <div class="col">
+        <div class="form-group required">
+            <label for="room">Room of reservation</label>
+            <select class="form-select" [(ngModel)]="reservation.roomName">
+            <option *ngFor="let room of rooms$|async" value="{{room}}">{{room}}</option>
+        </select>
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group required">
+            <label for="day">Day of reservation</label>
+            <div class="input-group">
+                <input id="day" readonly [(ngModel)]="nbDay" (click)="dp.toggle()" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4 mt-2">
+    <div class="col">
+        <div class="form-group required">
+            <label for="day">Organizer name</label>
+            <div class="input-group">
+                <input type="text" class="form-control" [(ngModel)]="reservation.organizer" placeholder="Name of organizer">
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group required">
+            <label for="day">Begin time</label>
+            <div class="input-group">
+                <select class="form-select" [(ngModel)]="reservation.beginTime">
+                    <option *ngFor="let slot of beginSlots" value="{{slot}}">{{slot}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group required">
+            <label for="day">End time</label>
+            <div class="input-group">
+                <select class="form-select" [(ngModel)]="reservation.endTime">
+                    <option *ngFor="let slot of endSlots" value="{{slot}}">{{slot}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="mt-2">
+        <div class="row">
+            <div class="col">
+                <small>All labels with an asterisk <span class="text-danger">(*)</span> are mandatory. Please fill them in to activate the creation button</small>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <button ngbButton [disabled]="canCreate()" type="submit" class="btn btn-sm btn-primary" (click)="create()">Create a new meeting</button>
+            </div>
+        </div>
+    </div>
+
+    <reservation-list [room]="reservation.roomName" [day]="reservation.day" [reservations]="reservations$|async" (onDelete)="delete($event)">
+    </reservation-list>

@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sgmarkets.Meeting.Allotment.Api", "Sgmarkets.Meeting.Allotment.Api\Sgmarkets.Meeting.Allotment.Api.csproj", "{1461D55E-786F-44B1-9431-9C5A7D9A82DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D938AA73-DAB2-4019-9125-0F724A90FA2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{EDBEA002-921F-4E77-A233-1579024D3A62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sgmarkets.Meeting.Allotment.Domain", "..\Domain\Sgmarkets.Meeting.Allotment.Domain\Sgmarkets.Meeting.Allotment.Domain.csproj", "{EC754527-746C-4A4C-9791-0079220D8859}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{0A10862D-DD42-4383-A2E7-043923D90826}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02430594-E8ED-4D03-917F-33CCCD73036F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sgmarkets.Meetting.Allotment.DomainTests", "..\Tests\Sgmarkets.Meetting.Allotment.DomainTests\Sgmarkets.Meetting.Allotment.DomainTests.csproj", "{FDB1449B-5740-4D4B-B595-36DBE60674A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1461D55E-786F-44B1-9431-9C5A7D9A82DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1461D55E-786F-44B1-9431-9C5A7D9A82DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1461D55E-786F-44B1-9431-9C5A7D9A82DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1461D55E-786F-44B1-9431-9C5A7D9A82DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC754527-746C-4A4C-9791-0079220D8859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC754527-746C-4A4C-9791-0079220D8859}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC754527-746C-4A4C-9791-0079220D8859}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC754527-746C-4A4C-9791-0079220D8859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDB1449B-5740-4D4B-B595-36DBE60674A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB1449B-5740-4D4B-B595-36DBE60674A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB1449B-5740-4D4B-B595-36DBE60674A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB1449B-5740-4D4B-B595-36DBE60674A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1461D55E-786F-44B1-9431-9C5A7D9A82DD} = {EDBEA002-921F-4E77-A233-1579024D3A62}
+		{EDBEA002-921F-4E77-A233-1579024D3A62} = {D938AA73-DAB2-4019-9125-0F724A90FA2B}
+		{EC754527-746C-4A4C-9791-0079220D8859} = {0A10862D-DD42-4383-A2E7-043923D90826}
+		{0A10862D-DD42-4383-A2E7-043923D90826} = {D938AA73-DAB2-4019-9125-0F724A90FA2B}
+		{02430594-E8ED-4D03-917F-33CCCD73036F} = {D938AA73-DAB2-4019-9125-0F724A90FA2B}
+		{FDB1449B-5740-4D4B-B595-36DBE60674A4} = {02430594-E8ED-4D03-917F-33CCCD73036F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC8DDF15-5640-4311-A46A-8489DAA68E04}
+	EndGlobalSection
+EndGlobal

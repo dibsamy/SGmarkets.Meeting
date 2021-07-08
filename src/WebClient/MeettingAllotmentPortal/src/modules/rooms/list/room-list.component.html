@@ -1,0 +1,22 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+            <h1>Meeting room list</h1>
+        </li>
+    </ol>
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-md-1" scope="col">#</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let room of rooms$|async; let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{room}}</td>
+        </tr>
+    </tbody>
+</table>

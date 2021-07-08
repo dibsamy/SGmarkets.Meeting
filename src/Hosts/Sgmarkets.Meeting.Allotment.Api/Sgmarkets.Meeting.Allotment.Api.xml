@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sgmarkets.Meeting.Allotment.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Sgmarkets.Meeting.Allotment.Api.Controllers.ReservationController.GetReservations(System.DateTime)">
+            <summary>
+            Return all reservations for the specific day
+            </summary>
+            <param name="day">DateTime</param>
+            <response code="200">When everything is OK</response>
+        </member>
+        <member name="M:Sgmarkets.Meeting.Allotment.Api.Controllers.ReservationController.GetSlots(System.DateTime)">
+            <summary>
+            Return all available slots for the specific day
+            </summary>
+            <param name="day">DateTime</param>
+            <response code="200">When everything is OK</response>
+        </member>
+        <member name="M:Sgmarkets.Meeting.Allotment.Api.Controllers.ReservationController.DeleteReservation(Sgmarkets.Meeting.Allotment.Api.Models.ReservationModel)">
+            <summary>
+            Delete the specific reseration
+            </summary>
+            <param name="model">ReservationModel</param>
+            <response code="200">When everything is OK</response>
+            <response code="400">
+            - When the model is not valid (empty, null, required property not specified, ... )<br/>
+            - When the reservation not found with criteria of model
+            </response>
+            <response code="500">When the internal exception occurred</response>
+        </member>
+        <member name="M:Sgmarkets.Meeting.Allotment.Api.Controllers.ReservationController.CreateReservation(Sgmarkets.Meeting.Allotment.Api.Models.ReservationModel)">
+            <summary>
+            Create a new reservation
+            </summary>
+            <param name="model"></param>
+            <response code="200">When everything is OK</response>
+            <response code="400">
+            - When the model is not valid (empty, null, required property not specified, ... )<br/>
+            - When the reservation did not specify a room<br/>
+            - When a business rule not respected
+            </response>
+            <response code="500">When the internal exception occurred</response>
+            <returns></returns>
+        </member>
+        <member name="M:Sgmarkets.Meeting.Allotment.Api.Controllers.RoomController.Get">
+            <summary>
+            Gets all meeting rooms name.
+            </summary>
+            <response code="200">When everything is OK</response>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

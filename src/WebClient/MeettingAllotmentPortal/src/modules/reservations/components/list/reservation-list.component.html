@@ -1,0 +1,39 @@
+<hr>
+<h3>List of reservations for room : {{room}}</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th>Organizer</th>
+            <th>Day</th>
+            <th>Begin time</th>
+            <th>End time</th>
+            <th>
+                <div class="d-flex justify-content-end">Actions</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let r of reservations; let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{r.organizer}}</td>
+            <td>{{r.day}}</td>
+            <td>{{r.beginTime}}</td>
+            <td>{{r.endTime}}</td>
+            <td>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-sm btn-danger" (click)="deleteHandler(r)">Delete</button>
+                </div>
+            </td>
+        </tr>
+        <tr *ngIf="reservations!=null && reservations.length == 0">
+            <th colspan="6">
+                <div class="d-flex justify-content-center">
+                    <h3>
+                        No reservations found for room : {{room}} on this date : {{day | date: 'EEEE dd MMMM yyyy'}}
+                    </h3>
+                </div>
+            </th>
+        </tr>
+    </tbody>
+</table>

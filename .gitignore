@@ -3,3 +3,9 @@
 ################################################################################
 
 /src/Domain/Sgmarkets.Meeting.Allotment.Domain/bin/Debug/netcoreapp3.1
+/src/Domain/Sgmarkets.Meeting.Allotment.Domain/obj
+/src/Hosts/.vs/Sgmarkets.Meeting.Allotment
+/src/Hosts/Sgmarkets.Meeting.Allotment.Api/bin/Debug/netcoreapp3.1
+/src/Hosts/Sgmarkets.Meeting.Allotment.Api/obj
+/src/Tests/Sgmarkets.Meetting.Allotment.DomainTests/bin/Debug/netcoreapp3.1
+/src/Tests/Sgmarkets.Meetting.Allotment.DomainTests/obj
