@@ -27,14 +27,20 @@ class ReservationService extends __BaseService {
 
   /**
    * Return all reservations for the specific day
-   * @param day DateTime
+   * @param params The `ReservationService.GetApiReservationListParams` containing the following parameters:
+   *
+   * - `room`: string
+   *
+   * - `day`: DateTime
+   *
    * @return When everything is OK
    */
-  getApiReservationListResponse(day?: string): __Observable<__StrictHttpResponse<Array<ReservationModel>>> {
+  getApiReservationListResponse(params: ReservationService.GetApiReservationListParams): __Observable<__StrictHttpResponse<Array<ReservationModel>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-    if (day != null) __params = __params.set('day', day.toString());
+    if (params.room != null) __params = __params.set('room', params.room.toString());
+    if (params.day != null) __params = __params.set('day', params.day.toString());
     let req = new HttpRequest<any>(
       'GET',
       this.rootUrl + `/api/Reservation/List`,
@@ -54,25 +60,36 @@ class ReservationService extends __BaseService {
   }
   /**
    * Return all reservations for the specific day
-   * @param day DateTime
+   * @param params The `ReservationService.GetApiReservationListParams` containing the following parameters:
+   *
+   * - `room`: string
+   *
+   * - `day`: DateTime
+   *
    * @return When everything is OK
    */
-  getApiReservationList(day?: string): __Observable<Array<ReservationModel>> {
-    return this.getApiReservationListResponse(day).pipe(
+  getApiReservationList(params: ReservationService.GetApiReservationListParams): __Observable<Array<ReservationModel>> {
+    return this.getApiReservationListResponse(params).pipe(
       __map(_r => _r.body as Array<ReservationModel>)
     );
   }
 
   /**
-   * Return all available slots
-   * @param day DateTime
+   * Return all available slots for the specific day
+   * @param params The `ReservationService.GetApiReservationFreeSlotsParams` containing the following parameters:
+   *
+   * - `room`: string
+   *
+   * - `day`: DateTime
+   *
    * @return When everything is OK
    */
-  getApiReservationFreeSlotsResponse(day?: string): __Observable<__StrictHttpResponse<Array<Slot>>> {
+  getApiReservationFreeSlotsResponse(params: ReservationService.GetApiReservationFreeSlotsParams): __Observable<__StrictHttpResponse<Array<Slot>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-    if (day != null) __params = __params.set('day', day.toString());
+    if (params.room != null) __params = __params.set('room', params.room.toString());
+    if (params.day != null) __params = __params.set('day', params.day.toString());
     let req = new HttpRequest<any>(
       'GET',
       this.rootUrl + `/api/Reservation/FreeSlots`,
@@ -91,12 +108,17 @@ class ReservationService extends __BaseService {
     );
   }
   /**
-   * Return all available slots
-   * @param day DateTime
+   * Return all available slots for the specific day
+   * @param params The `ReservationService.GetApiReservationFreeSlotsParams` containing the following parameters:
+   *
+   * - `room`: string
+   *
+   * - `day`: DateTime
+   *
    * @return When everything is OK
    */
-  getApiReservationFreeSlots(day?: string): __Observable<Array<Slot>> {
-    return this.getApiReservationFreeSlotsResponse(day).pipe(
+  getApiReservationFreeSlots(params: ReservationService.GetApiReservationFreeSlotsParams): __Observable<Array<Slot>> {
+    return this.getApiReservationFreeSlotsResponse(params).pipe(
       __map(_r => _r.body as Array<Slot>)
     );
   }
@@ -175,6 +197,38 @@ class ReservationService extends __BaseService {
 }
 
 module ReservationService {
+
+  /**
+   * Parameters for getApiReservationList
+   */
+  export interface GetApiReservationListParams {
+
+    /**
+     * string
+     */
+    room?: string;
+
+    /**
+     * DateTime
+     */
+    day?: string;
+  }
+
+  /**
+   * Parameters for getApiReservationFreeSlots
+   */
+  export interface GetApiReservationFreeSlotsParams {
+
+    /**
+     * string
+     */
+    room?: string;
+
+    /**
+     * DateTime
+     */
+    day?: string;
+  }
 }
 
 export { ReservationService }

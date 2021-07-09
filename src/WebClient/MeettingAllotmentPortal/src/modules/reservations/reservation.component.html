@@ -10,7 +10,7 @@
     <div class="col">
         <div class="form-group required">
             <label for="room">Room of reservation</label>
-            <select class="form-select" [(ngModel)]="reservation.roomName">
+            <select class="form-select" [(ngModel)]="reservation.roomName" (change)="onRoomChanged($event)">
             <option *ngFor="let room of rooms$|async" value="{{room}}">{{room}}</option>
         </select>
         </div>

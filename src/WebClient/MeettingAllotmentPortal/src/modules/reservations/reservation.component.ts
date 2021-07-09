@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { ReservationModel } from '@proxy/Sgmarkets-meeting/models';
+import { ReservationModel, Slot } from '@proxy/Sgmarkets-meeting/models';
 import { ReservationService, RoomService } from '@proxy/Sgmarkets-meeting/services';
 
 import { Observable, of } from 'rxjs';
@@ -89,8 +89,13 @@ export class ReservationComponent implements OnInit {
             || !this.reservation.endTime
     }
 
+    onRoomChanged($event: any) {
+        this.loadFreeSLots()
+        this.loadReservations()
+    }
+
     private loadReservations() {
-        this.reservationService.getApiReservationList(this.convertToDate())
+        this.reservationService.getApiReservationList({ room: this.reservation.roomName, day: this.convertToDate() })
             .subscribe(reservations => {
                 this.reservations$ = of(reservations)
             })
@@ -99,12 +104,21 @@ export class ReservationComponent implements OnInit {
     private loadFreeSLots() {
         this.endSlots = []
         this.beginSlots = []
-        this.reservationService.getApiReservationFreeSlots(this.convertToDate())
+        this.reservationService.getApiReservationFreeSlots({ room: this.reservation.roomName, day: this.convertToDate() })
             .subscribe(slots => {
-                slots.forEach((slot: any) => {
+                slots.forEach((slot: any, index: number) => {
                     let hour = slot.start.hours < 10 ? "0" + slot.start.hours : slot.start.hours;
-                    if (slot.start.hours != 0) this.beginSlots.push(hour + ":00")
-                    if (slot.start.hours != 1) this.endSlots.push(hour + ":00")
+                    if (index == 0) {
+                        this.beginSlots.push(hour + ":00")
+                    }
+                    else if (index == slots.length - 1) {
+                        this.endSlots.push(hour + ":00")
+                    } else {
+                        this.beginSlots.push(hour + ":00")
+                        this.endSlots.push(hour + ":00")
+                    }
+                    this.reservation.beginTime = this.beginSlots[0]
+                    this.reservation.endTime = this.endSlots[0]
                 });
             })
     }
