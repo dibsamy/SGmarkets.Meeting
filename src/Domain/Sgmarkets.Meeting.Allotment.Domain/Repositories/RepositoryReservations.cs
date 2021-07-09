@@ -34,7 +34,7 @@ namespace Sgmarkets.Meeting.Allotment.Domain.Repositories
                 throw new EndTimeLessOrEqualStartTimeException(reservation);
 
             //Generate day's key
-            var key = GenerateKey(reservation.Day);
+            var key = GenerateKey(reservation.Room.Name, reservation.Day);
 
             //If this is the first meeting for this day
             if (!_reservations.ContainsKey(key))
@@ -55,7 +55,7 @@ namespace Sgmarkets.Meeting.Allotment.Domain.Repositories
 
         public void Delete(Reservation reservation)
         {
-            var key = GenerateKey(reservation.Day);
+            var key = GenerateKey(reservation.Room.Name, reservation.Day);
 
             if (!_reservations.ContainsKey(key))
             {
@@ -69,7 +69,7 @@ namespace Sgmarkets.Meeting.Allotment.Domain.Repositories
 
         public Reservation Find(DateTime day, TimeSpan beginTime, TimeSpan endTime, string roomName)
         {
-            var key = GenerateKey(day);
+            var key = GenerateKey(roomName, day);
 
             if (!_reservations.ContainsKey(key))
             {
@@ -86,9 +86,9 @@ namespace Sgmarkets.Meeting.Allotment.Domain.Repositories
 
         }
 
-        public IEnumerable<Reservation> GetReservations(DateTime day)
+        public IEnumerable<Reservation> GetReservations(string room, DateTime day)
         {
-            var key = GenerateKey(day);
+            var key = GenerateKey(room, day);
 
             if (!_reservations.ContainsKey(key))
             {
@@ -98,11 +98,11 @@ namespace Sgmarkets.Meeting.Allotment.Domain.Repositories
         }
 
 
-        public IEnumerable<Slot> GetSlots(DateTime day)
+        public IEnumerable<Slot> GetSlots(string room, DateTime day)
         {
             List<Slot> slots;
 
-            var key = GenerateKey(day);
+            var key = GenerateKey(room, day);
 
             if (!_reservations.ContainsKey(key))
             {
@@ -127,11 +127,10 @@ namespace Sgmarkets.Meeting.Allotment.Domain.Repositories
             }
 
             return slots;
-
         }
 
         #region : Utilities
-        private string GenerateKey(DateTime day) => day.ToString("dd_MM_yyyy");
+        private string GenerateKey(string room, DateTime day) => $"{room}_{day.ToString("dd_MM_yyyy")}";
 
         private bool IsOverlap(IList<Reservation> meetings, Reservation meeting)
         {

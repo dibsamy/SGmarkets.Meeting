@@ -93,9 +93,10 @@ namespace Sgmarkets.Meetting.Allotment.DomainTests
         {
             //Arrange
             var now = DateTime.Now;
+            var room = "Room0";
             var reservation = new Reservation
             {
-                Room = new Room { Name = "Room0" },
+                Room = new Room { Name = room },
                 Day = now,
                 BeginTime = new TimeSpan(10, 0, 0),
                 EndTime = new TimeSpan(11, 0, 0)
@@ -103,7 +104,7 @@ namespace Sgmarkets.Meetting.Allotment.DomainTests
 
             // Act
             _sut.Add(reservation);
-            var reservations = _sut.GetReservations(now);
+            var reservations = _sut.GetReservations(room, now);
 
             //Assert
             Assert.IsTrue(reservations.Count() == 1);
@@ -205,16 +206,17 @@ namespace Sgmarkets.Meetting.Allotment.DomainTests
         {
             //Arrange
             var now = DateTime.Now;
+            var room = "Room0";
             var r1 = new Reservation
             {
-                Room = new Room { Name = "Room0" },
+                Room = new Room { Name = room },
                 Day = now,
                 BeginTime = new TimeSpan(8, 0, 0),
                 EndTime = new TimeSpan(10, 0, 0)
             };
             var r2 = new Reservation
             {
-                Room = new Room { Name = "Room0" },
+                Room = new Room { Name = room },
                 Day = now,
                 BeginTime = new TimeSpan(10, 0, 0),
                 EndTime = new TimeSpan(11, 0, 0)
@@ -224,7 +226,7 @@ namespace Sgmarkets.Meetting.Allotment.DomainTests
             _sut.Add(r2);
 
             // Act
-            var act = _sut.GetReservations(now);
+            var act = _sut.GetReservations(room, now);
 
             //Assert
             Assert.IsTrue(2 == act.Count());
@@ -240,16 +242,17 @@ namespace Sgmarkets.Meetting.Allotment.DomainTests
             var expectedFreeSlots = 21;
             var expectedOccupedSlots = 3;
             var now = DateTime.Now;
+            var room = "Room0";
             var r1 = new Reservation
             {
-                Room = new Room { Name = "Room0" },
+                Room = new Room { Name = room },
                 Day = now,
                 BeginTime = new TimeSpan(8, 0, 0),
                 EndTime = new TimeSpan(10, 0, 0)
             };
             var r2 = new Reservation
             {
-                Room = new Room { Name = "Room0" },
+                Room = new Room { Name = room },
                 Day = now,
                 BeginTime = new TimeSpan(10, 0, 0),
                 EndTime = new TimeSpan(11, 0, 0)
@@ -259,7 +262,7 @@ namespace Sgmarkets.Meetting.Allotment.DomainTests
             _sut.Add(r2);
 
             // Act
-            var act = _sut.GetSlots(now);
+            var act = _sut.GetSlots(room, now);
 
             //Assert
             Assert.IsTrue(expectedSlots == act.Count());
@@ -274,9 +277,10 @@ namespace Sgmarkets.Meetting.Allotment.DomainTests
             //Arrange
             var expectedSlots = 24;
             var now = DateTime.Now;
+            var room = "Room0";
 
             // Act
-            var act = _sut.GetSlots(now);
+            var act = _sut.GetSlots(room, now);
 
             //Assert
             Assert.IsTrue(expectedSlots == act.Count());

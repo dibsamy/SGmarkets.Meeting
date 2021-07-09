@@ -37,14 +37,15 @@ namespace Sgmarkets.Meeting.Allotment.Api.Controllers
         /// Return all reservations for the specific day
         /// </summary>
         /// <param name="day">DateTime</param>
+        /// <param name="room">string</param>
         /// <response code="200">When everything is OK</response>
         [HttpGet]
         [Route("List")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(IEnumerable<ReservationModel>), StatusCodes.Status200OK)]
-        public async Task<IEnumerable<ReservationModel>> GetReservations(DateTime day)
+        public async Task<IEnumerable<ReservationModel>> GetReservations(string room, DateTime day)
         {
-            var reservations = Task.Run(() => _repositoryReservations.GetReservations(day).Select(s => s.MapToModel()));
+            var reservations = Task.Run(() => _repositoryReservations.GetReservations(room, day).Select(s => s.MapToModel()));
             return await reservations;
         }
 
@@ -52,14 +53,15 @@ namespace Sgmarkets.Meeting.Allotment.Api.Controllers
         /// Return all available slots for the specific day
         /// </summary>
         /// <param name="day">DateTime</param>
+        /// <param name="room">string</param>
         /// <response code="200">When everything is OK</response>
         [HttpGet]
         [Route("FreeSlots")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(IEnumerable<Slot>), StatusCodes.Status200OK)]
-        public async Task<IEnumerable<Slot>> GetSlots(DateTime day)
+        public async Task<IEnumerable<Slot>> GetSlots(string room, DateTime day)
         {
-            var slots = Task.Run(() => _repositoryReservations.GetSlots(day).Where(s => s.Free));
+            var slots = Task.Run(() => _repositoryReservations.GetSlots(room, day).Where(s => s.Free));
             return await slots;
         }
 
