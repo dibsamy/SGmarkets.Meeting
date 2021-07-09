@@ -4,17 +4,13 @@ import { ReservationModel, Slot } from '@proxy/Sgmarkets-meeting/models';
 import { ReservationService, RoomService } from '@proxy/Sgmarkets-meeting/services';
 
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Component({
     selector: 'reservation',
     templateUrl: './reservation.component.html',
-    styles: [`
-        .required > label:after {
-            content:" *";
-            color: red;
-        }
-    `]
+    styleUrls:['./reservation.component.scss']
 })
 
 export class ReservationComponent implements OnInit {
@@ -104,7 +100,8 @@ export class ReservationComponent implements OnInit {
     private loadFreeSLots() {
         this.endSlots = []
         this.beginSlots = []
-        this.reservationService.getApiReservationFreeSlots({ room: this.reservation.roomName, day: this.convertToDate() })
+        this.reservationService
+            .getApiReservationFreeSlots({ room: this.reservation.roomName, day: this.convertToDate() })
             .subscribe(slots => {
                 slots.forEach((slot: any, index: number) => {
                     let hour = slot.start.hours < 10 ? "0" + slot.start.hours : slot.start.hours;

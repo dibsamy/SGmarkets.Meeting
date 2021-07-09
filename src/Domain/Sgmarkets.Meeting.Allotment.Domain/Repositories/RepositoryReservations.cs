@@ -9,7 +9,7 @@ namespace Sgmarkets.Meeting.Allotment.Domain.Repositories
 {
     public class RepositoryReservations : IRepositoryReservations
     {
-
+        private int nbSlots = 24;
         private readonly IDictionary<string, List<Reservation>> _reservations;
 
         public RepositoryReservations()
@@ -107,8 +107,8 @@ namespace Sgmarkets.Meeting.Allotment.Domain.Repositories
             if (!_reservations.ContainsKey(key))
             {
                 slots = new List<Slot>();
-                for (var i = 1; i <= 24; ++i)
-                    slots.Add(new Slot(new TimeSpan(i % 24, 0, 0), true));
+                for (var i = 1; i <= nbSlots; ++i)
+                    slots.Add(new Slot(new TimeSpan(i % nbSlots, 0, 0), true));
             }
             else
             {
@@ -121,9 +121,9 @@ namespace Sgmarkets.Meeting.Allotment.Domain.Repositories
                     if (slot == null)
                         slots.Add(new Slot(start, true));
 
-                    start = new TimeSpan(++i % 24, 0, 0);
+                    start = new TimeSpan(++i % nbSlots, 0, 0);
 
-                } while (i <= 24);
+                } while (i <= nbSlots);
             }
 
             return slots;

@@ -61,7 +61,11 @@ namespace Sgmarkets.Meeting.Allotment.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<Slot>), StatusCodes.Status200OK)]
         public async Task<IEnumerable<Slot>> GetSlots(string room, DateTime day)
         {
-            var slots = Task.Run(() => _repositoryReservations.GetSlots(room, day).Where(s => s.Free));
+            var slots = Task.Run(() =>
+            {
+                var arr = _repositoryReservations.GetSlots(room, day).OrderBy(s => s.Start);
+                return arr.Skip(1).Concat(arr.Take(1));
+            });
             return await slots;
         }
 
